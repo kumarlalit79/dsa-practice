@@ -48,6 +48,14 @@ void insertAtTail(Node* &tail, int data) {
 }
 
 void print(Node* head) {
+
+    if (head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return ;
+    }
+    
+
     Node* temp = head;
     while (temp != NULL) {
         cout << temp->data << " ";
