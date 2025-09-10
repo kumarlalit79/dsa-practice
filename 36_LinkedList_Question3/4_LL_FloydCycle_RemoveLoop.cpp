@@ -53,10 +53,13 @@ Node* getStartingNode(Node* head){
     
     // sbse pehle point of intersection chhahiye, or wo mujhe floydDetectLoop() function dega
     Node* intersection = floydDetectLoop(head);
+
     if (intersection == NULL)
     {
         return NULL;
     }
+    
+
     Node* slow = head;
 
     while (slow != intersection)
@@ -66,6 +69,29 @@ Node* getStartingNode(Node* head){
     }
     return slow;    
 
+}
+
+void removeLoop(Node* head){
+
+    if (head == NULL)
+    {
+        return;
+    }
+
+    Node* startOfLoop = getStartingNode(head); // yaha se starting node mil jayegi
+    if (startOfLoop == NULL) {
+        cout << "No loop found, nothing to remove." << endl;
+        return;
+    }
+
+    Node* temp = startOfLoop;
+    while (temp -> next != startOfLoop)
+    {
+        temp = temp -> next;
+    }
+    
+    temp -> next = NULL;
+    cout << "Loop removed successfully! List is now linear." << endl;
 }
 
 void insertAtTail(Node* &tail, int data) {
@@ -123,8 +149,13 @@ int main(){
         cout << "No loop detected!" << endl;
     }
 
-
+    // finding head of cycle
     Node* loop = getStartingNode(head) ;
     cout << "Loop starts at : " << loop -> data << endl; 
+
+    // removing loop
+    removeLoop(head);
+    print(head);
+
     return 0;
 }
