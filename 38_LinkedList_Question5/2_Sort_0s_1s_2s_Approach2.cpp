@@ -14,10 +14,12 @@ public:
     }
 };
 
-void insertAtTail(Node* &tail, int data) {
-    Node* newNode = new Node(data);
-    tail->next = newNode;
-    tail = newNode;
+
+// check it once : // Ye version curr node ko tail se attach karega
+void insertAtTail(Node* &tail, Node* curr) {
+   
+    tail->next = curr; // tail ke next me curr attach kiya
+    tail = curr; // tail ko aage badha diya
 }
 
 void print(Node* head) {
@@ -37,66 +39,78 @@ void print(Node* head) {
 }
 
 Node* sortList(Node* head){
-    int zeroCount = 0;
-    int oneCount = 0;
-    int twoCount = 0;
 
-    // Step 1: Count 0s, 1s, 2s, ab ek baar LL traverse karlo
-    Node* temp = head;
-    while (temp != NULL)
+    // Step 1: Dummy heads and tails banaye
+    Node* zeroHead = new Node(-1); // isme -1 pada hai abhi.
+    Node* zeroTail = zeroHead; // taki insertAtTail kr sake, or ye starting mai zeroHead ko point krri.               
+    
+    Node* oneHead = new Node(-1); // isme -1 pada hai abhi.
+    Node* oneTail = oneHead; // taki insertAtTail kr sake.
+
+    Node* twoHead = new Node(-1); // isme -1 pada hai abhi.
+    Node* twoTail = twoHead; // taki insertAtTail kr sake.
+
+    // Step 2: Original list traverse
+    Node* curr = head;
+
+    // creating seperate LL for 0,1,2
+    while (curr != NULL)
     {
-        if (temp -> data == 0)
+        int value = curr -> data; // compare krne ke liye isko le rahe hai
+
+        if (value == 0)
         {
-            zeroCount++;
+            insertAtTail(zeroTail , curr);
         }
-        else if (temp -> data == 1)
-        {
-            oneCount++;
+        else if(value == 1){
+            insertAtTail(oneTail , curr);
         }
-        else if(temp -> data == 2){
-            twoCount++;
+        else if(value == 2){
+            insertAtTail(twoTail , curr);
         }
-        temp = temp -> next;
+
+        curr = curr -> next;
     }
 
-    // count hamne nikaal liye, ab neeche LL ko traverse krke replce kr dena data do
-    // Step 2: Replace data based on counts
-    temp = head;
-    while (temp != NULL)
+    // now merge these 3 sublist
+    // Step 3: Merge lists
+    // 0 list -> 1 list (agar 1 list empty nahi hai)
+    if (oneHead -> next != NULL) // that means 1 ki list Non Empty hai
     {
-        if (zeroCount != 0)
-        {
-            temp -> data = 0; // temp ke data mai 0 daal diya
-            zeroCount--;
-        }
-        else if (oneCount != 0)
-        {
-            temp -> data = 1;
-            oneCount--;
-        }
-        else if (twoCount != 0)
-        {
-            temp -> data = 2;
-            twoCount--;
-        }
-        temp = temp -> next; 
+        zeroTail -> next = oneHead -> next;
     }
+    else{
+        // 1 waali list empty nikli, to 0 waali list ke aage 2 waali list laga do
+        zeroTail -> next = twoHead -> next;
+    }
+
+    oneTail -> next = twoHead -> next;
+    twoTail -> next = NULL;
+
+    // ab dummy node ko delete maar do and head ko 1st node pe point karwa do
+    head = zeroHead -> next;
+    delete zeroHead;
+    delete oneHead;
+    delete twoHead;
+
     return head;
+
 }
 
 int main(){
     
-    // Create an unsorted list with 0s, 1s, 2s
+    // Create unsorted list with 0s, 1s, 2s
     Node* node1 = new Node(1);
     Node* head = node1;
     Node* tail = node1;
 
-    insertAtTail(tail, 0);
-    insertAtTail(tail, 2);
-    insertAtTail(tail, 1);
-    insertAtTail(tail, 2);
-    insertAtTail(tail, 0);
-    insertAtTail(tail, 1);
+    // Ye insert tail normal hai list create karne ke liye
+    tail->next = new Node(0); tail = tail->next;
+    tail->next = new Node(2); tail = tail->next;
+    tail->next = new Node(1); tail = tail->next;
+    tail->next = new Node(2); tail = tail->next;
+    tail->next = new Node(0); tail = tail->next;
+    tail->next = new Node(1); tail = tail->next;
 
     cout << "Original List: ";
     print(head);
