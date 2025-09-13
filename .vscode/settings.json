@@ -61,6 +61,7 @@
     "ostream": "cpp",
     "algorithm": "cpp",
     "vector": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "array": "cpp"
   }
 }

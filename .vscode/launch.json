@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Programming/DSA-LoveBabbar/3_4_Lec_Conditional",
-      "program": "d:/Programming/DSA-LoveBabbar/3_4_Lec_Conditional/build/Debug/outDebug",
+      "cwd": "d:/Programming/DSA-LoveBabbar/43_Stack",
+      "program": "d:/Programming/DSA-LoveBabbar/43_Stack/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
