@@ -62,6 +62,7 @@
     "algorithm": "cpp",
     "vector": "cpp",
     "map": "cpp",
-    "array": "cpp"
+    "array": "cpp",
+    "stack": "cpp"
   }
 }
