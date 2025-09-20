@@ -19,7 +19,7 @@ class CircularQueue{
     }
 
     bool enqueue(int data){
-        if ((front == 0 && rear == size-1) || (rear == ( (front - 1 + size) % size )))
+        if ((front == 0 && rear == size-1) || (rear == ( (front - 1 + size) % size ))) // (front - 1 ) % (size-1) bhi likh skte
         {
             cout << "Queue is full" << endl;
             return false;
