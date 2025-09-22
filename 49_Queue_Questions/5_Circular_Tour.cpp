@@ -22,7 +22,7 @@ int tour(petrolPump p[] , int n){
         if (balance < 0)
         {
             kami = kami + balance; // -ve aa gaya to means kami mai isko add kr liye ki itni kami padri hai
-            start = i + 1; // start ko un -ve ke aage se start krna hoga. nai jgh se start kar re
+            start = i + 1; // start ko un -ve ke aage se start krna hoga. nai jgh se start kar re. new starting point basically ye hoga.
             balance = 0; //nai jgh se start kar re to balance ko 0 kardo dobara se
         }
     }
