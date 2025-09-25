@@ -32,23 +32,28 @@ void merge(int *arr, int s , int e){
     int index2 = 0;// second array ka index
     mainArrayIndex = s;
 
+    // dono array ke element compare karke original array me store karte rahenge
     while (index1 < len1 && index2 < len2)
     {
+        // agar first array ka current element chhota hai to wo daal do original array me
         if(first[index1] < second[index2]){
-            arr[mainArrayIndex++] = first[index1++];
+            arr[mainArrayIndex++] = first[index1++];  // element copy karo, index1++ means next element pe move ho jao
         }
         else{
-            arr[mainArrayIndex++] = second[index2++];
+            arr[mainArrayIndex++] = second[index2++]; // warna second array ka element chhota hai to wo daal do
         }
     }
     
+    // agar first array ke elements bache hain to unhe copy kar do
     while (index1 < len1)
     {
-        arr[mainArrayIndex++] = first[index1++];
+        arr[mainArrayIndex++] = first[index1++];  // baaki bachhe huye element daal do
     }
+
+    // agar second array ke elements bache hain to unhe copy kar do
     while (index2 < len2)
     {
-        arr[mainArrayIndex++] = second[index2++];
+        arr[mainArrayIndex++] = second[index2++]; // baaki bachhe huye element daal do
     }
     
     // deleting, cuz inka kaam yaha pe khtm ho gaya
