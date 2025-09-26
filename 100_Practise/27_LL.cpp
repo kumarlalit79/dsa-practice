@@ -66,6 +66,17 @@ void print(Node* &head){
     cout << endl;
 }
 
+int lengthLL(Node* &head){
+    Node* temp = head;
+    int len = 0;
+    while (temp != NULL)
+    {
+        len++;
+        temp = temp -> next;
+    }
+    return len;
+}
+
 int main(){
 
     Node* node1 = new Node(10);
@@ -80,6 +91,8 @@ int main(){
 
     insertAtPosition(head, tail, position , 9);
     print(head);
+
+    cout << "Length : " << lengthLL(head);
 
     return 0;
 }
