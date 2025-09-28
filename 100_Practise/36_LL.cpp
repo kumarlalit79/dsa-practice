@@ -31,13 +31,12 @@ void print(Node* &head){
     cout << endl;
 }
 
-Node* reverseKgroups(Node* &head, int k){
+Node* kreverse(Node* &head , int k){
 
     if (head == NULL)
     {
         return NULL;
     }
-    
     Node* curr = head;
     Node* prev = NULL;
     Node* forward = NULL;
@@ -49,16 +48,14 @@ Node* reverseKgroups(Node* &head, int k){
         curr -> next = prev;
         prev = curr;
         curr = forward;
-        count++;
+        count++;   
     }
-    
     if (forward != NULL)
     {
-        head -> next = reverseKgroups(forward, k);
+        head -> next = kreverse(forward, k);
     }
-
+    
     return prev;
-
 }
 
 int main(){
@@ -71,12 +68,8 @@ int main(){
     insertAtTail(tail, 12);
     insertAtTail(tail, 13);
     insertAtTail(tail, 14);
-    insertAtTail(tail, 15);
-    cout << "Original" << endl;
+    print(head);    
+    head = kreverse(head, 2);
     print(head);
-    cout << "K groups" << endl;
-    head = reverseKgroups(head, 2);
-    print(head);
-
     return 0;
 }
