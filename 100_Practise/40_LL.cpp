@@ -37,7 +37,6 @@ Node* uniqueLL(Node* &head){
     {
         return NULL;
     }
-    
     Node* curr = head;
     while (curr != NULL)
     {
@@ -54,6 +53,7 @@ Node* uniqueLL(Node* &head){
     }
     
     return head;
+    
 }
 
 
