@@ -2,53 +2,59 @@
 #include<stack>
 using namespace std;
 
-void solve(stack<int> &inputStack , int size, int count){
+bool isBalanced(string expression){
 
-    if (count == size/2)
+    stack<char> s;
+    for (int i = 0; i < expression.length(); i++)
     {
-        inputStack.pop();
-        return;
+        char ch = expression[i];
+        if (ch == '(' || ch == '[' || ch == '{')
+        {
+            s.push(ch);
+        }
+        else{
+            if (!s.empty())
+            {
+                char top = s.top();
+                if ((ch == ')' && top == '(') || 
+                    (ch == ']' && top == '[')||
+                    (ch == '}' && top == '{')
+                )
+                {
+                    s.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+            
+        }
     }
-    
-    int topElement = inputStack.top();
-    inputStack.pop();
 
-    solve(inputStack, size, count+1);
-
-    inputStack.push(topElement);
-}
-
-void deleteMiddle(stack<int> &inputStack , int size){
-    int count = 0;
-    solve(inputStack , size , count);
+    if (s.empty())
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 int main(){
 
-    stack<int> s;
-    s.push(4);
-    s.push(8);
-    s.push(12);
-    s.push(9);
-    s.push(5);
+    string expression = "{[()]}";
 
-    stack<int> temp = s;
-    cout << "Original : ";
-    while (!temp.empty())
+    bool check = isBalanced(expression);
+    if (check)
     {
-        cout << temp.top() << " ";
-        temp.pop();
+        cout << "Balanced" << endl;
     }
-    
-    deleteMiddle(s,5);
-    cout << "After deletion : ";
-    while (!s.empty())
-    {
-        cout << s.top() << " ";
-        s.pop();
+    else{
+        cout << "Not Balanced" << endl;
     }
-    cout << endl;
-    
 
     return 0;
 }
